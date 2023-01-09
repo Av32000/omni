@@ -58,6 +58,10 @@ const clearActions = () => {
 			{ title: "Incognito mode", desc: "Open an incognito window", type: "action", action: "incognito", emoji: true, emojiChar: "🕵️", keycheck: true, keys: ['⌘', '⇧', 'N'] },
 			{ title: "Downloads", desc: "Browse through your downloads", type: "action", action: "downloads", emoji: true, emojiChar: "📦", keycheck: true, keys: ['⌘', '⇧', 'J'] },
 			{ title: "Extensions", desc: "Manage your Chrome Extensions", type: "action", action: "extensions", emoji: true, emojiChar: "🧩", keycheck: false, keys: ['⌘', 'D'] },
+			{ title: "Update", desc: "Check Google Chrome Updates", type: "action", action: "update", emoji: true, emojiChar: "🔄️", keycheck: false, keys: ['⌘', ','] },
+			{ title: "Dino", desc: "Open Google Chrome dino game", type: "action", action: "dino", emoji: true, emojiChar: "🦕", keycheck: false, keys: ['⌘', ','] },
+			{ title: "Languages Settings", desc: "Open Languages Settings", type: "action", action: "languages", emoji: true, emojiChar: "🌐", keycheck: false, keys: ['⌘', ','] },
+			{ title: "Chrome Web Store", desc: "Open Chrome Web Store", type: "action", action: "url", emoji: true, emojiChar: "🛍️", keycheck: false, keys: ['⌘', ','], url: "https://chrome.google.com/webstore/category/extensions" },
 			{ title: "Chrome settings", desc: "Open the Chrome settings", type: "action", action: "settings", emoji: true, emojiChar: "⚙️", keycheck: true, keys: ['⌘', ','] },
 			{ title: "Scroll to bottom", desc: "Scroll to the bottom of the page", type: "action", action: "scroll-bottom", emoji: true, emojiChar: "👇", keycheck: true, keys: ['⌘', '↓'] },
 			{ title: "Scroll to top", desc: "Scroll to the top of the page", type: "action", action: "scroll-top", emoji: true, emojiChar: "👆", keycheck: true, keys: ['⌘', '↑'] },
@@ -90,7 +94,7 @@ const clearActions = () => {
 					case "downloads":
 						action.keys = ['Ctrl', 'J'];
 						break;
-					case "settings":
+					case "settings" || "update" || "dino" || "languages":
 						action.keycheck = false;
 						break;
 					case "history":
@@ -422,6 +426,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 			break;
 		case "manage-data":
 			openChromeUrl("settings/clearBrowserData");
+			break;
+		case "languages":
+			openChromeUrl("settings/languages")
+			break;
+		case "dino":
+			openChromeUrl("dino")
+			break;
+		case "update":
+			openChromeUrl("settings/help")
 			break;
 		case "incognito":
 			openIncognito();
